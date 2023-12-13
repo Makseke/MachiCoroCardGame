@@ -52,8 +52,7 @@ public class App
 
             @Override
             public void connected(Connection connection) {
-                TextResponseTO welcomeMessage = new TextResponseTO();
-                welcomeMessage.setText("Welcome to the server!");
+                TextResponseTO welcomeMessage = new TextResponseTO("Welcome to the server!");
                 connection.sendTCP(welcomeMessage);
                 connection.setTimeout(0);
                 connection.setKeepAliveTCP(5000);
@@ -63,7 +62,7 @@ public class App
             public void received(Connection connection, Object object) {
                 if (object instanceof TextRequestTO) {
                     TextRequestTO request = (TextRequestTO) object;
-                    
+
                     TextResponseTO response = new TextResponseTO();
                     response.setText("Received message: " + request.getText());
                     connection.sendTCP(response);
@@ -96,6 +95,8 @@ public class App
                 if (object instanceof TextResponseTO) {
                     TextResponseTO response = (TextResponseTO) object;
                     System.out.println("Server response: " + response.getText());
+                } else {
+                    System.out.println("Received unexpected object: " + object.toString());
                 }
             }
 
@@ -115,7 +116,9 @@ public class App
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
-            client.stop();
+            while (true){
+                
+            }
         }
     }
 }
