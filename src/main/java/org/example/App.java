@@ -83,6 +83,10 @@ public class App
         client.getKryo().register(TextRequestTO.class);
         client.getKryo().register(TextResponseTO.class);
 
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("SELECT IP ADDRESS");
+        String ip = scanner.nextLine();
+
         client.addListener(new Listener() {
             public void received(Connection connection, Object object) {
                 if (object instanceof TextResponseTO) {
@@ -94,7 +98,7 @@ public class App
 
         try {
             client.start();
-            client.connect(5000, "127.0.0.1", 54555, 54777);
+            client.connect(5000, ip, 54555, 54777);
 
             // Создание и отправка запроса на сервер
             TextRequestTO request = new TextRequestTO();
