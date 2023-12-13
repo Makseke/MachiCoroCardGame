@@ -110,14 +110,14 @@ public class App
         try {
             client.start();
             client.connect(5000, ip, 54555, 54777);
-            TextRequestTO request = new TextRequestTO();
+            TextResponseTO request = new TextResponseTO();
             request.setText("Hello, server!");
             client.sendTCP(request);
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
             while (true){
-                
+
             }
         }
     }
